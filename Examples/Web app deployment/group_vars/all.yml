@@ -1,0 +1,6 @@
+region: us-east-2
+instance_type: t2.micro
+ami: ami-0a63f96e85105c6d3  # Ubuntu 18.04 LTS
+app_code_user: "ubuntu" # remote user
+env: assignment
+pem_key: kgs # key.pem

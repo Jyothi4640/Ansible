@@ -1,0 +1,34 @@
+  - name: Installs nginx web server
+    apt: pkg=nginx state=present update_cache=true
+    notify:
+    - start nginx
+
+  - name: add index.html file
+    template:
+       src: /root/ansible/assignment/roles/web-1/templates/index.html
+       dest: /var/www/html/index.html
+       mode: 0644
+   
+  - name: Create nginx /etc/nginx/conf.d
+    file:
+     path: /etc/nginx/conf.d
+     state: directory
+     mode: 0755
+
+  - name: copy nginx config file to /etc/nginx/conf.d
+    template: src=/root/ansible/assignment/roles/web-1/templates/nginx.conf dest=/etc/nginx/conf.d/
+
+
+
+  - name: reStart Nginx
+    service:
+       name: nginx
+       state: restarted
+      #  - name: Upload default index.html for host
+      # copy:  
+      # src: static_files/index.html 
+      # dest: /usr/share/nginx/
+      #mode: 0644
+    #      dest: /usr/share/nginx/html/index.html
+    #  content: "Hello from {{ ansible_hostname }}"
+    #  mode: 0644
